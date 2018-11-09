@@ -9,9 +9,9 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import darkstyle from "@/styles.js";
+import mapstyles from "@/styles.js";
 
-
+let style = mapstyles["darktheme"];
 export default {
   name: "home",
   components: {
@@ -22,7 +22,7 @@ export default {
     const options = {
         zoom: 14,
         center: new google.maps.LatLng(47.071467, 8.277621),
-        styles: darkstyle
+        styles: style
     }
     this.map = new google.maps.Map(element, options);
 
