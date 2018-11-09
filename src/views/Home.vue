@@ -2,6 +2,13 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="options_section"> 
+      <label class="switch">
+        <input v-on:click="changeMap" id="mode_switch" type="checkbox" checked>
+        <span class="slider round"></span>
+      </label>
+      </div>
+
     <div id="map"></div>
   </div>
 </template>
@@ -11,11 +18,26 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import mapstyles from "@/styles.js";
 
-let style = mapstyles["darktheme"];
+let style = mapstyles["lighttheme"];
+
 export default {
   name: "home",
   components: {
     HelloWorld
+  },
+  methods:{
+      changeMap: function () {
+        
+        let modeswitch = document.getElementById("mode_switch");
+        if(modeswitch.checked){
+          style = mapstyles["lighttheme"];
+        }else{
+          style = mapstyles["darktheme"];
+        }
+        this.map.setOptions({
+          styles : style
+        });
+      }
   },
   mounted: function(){
     const element = document.getElementById("map")
@@ -57,12 +79,24 @@ export default {
 
   }
 };
+
+
 </script>
 
 <style scoped lang="scss">
+
 #map {
   height: 80vh;
   width: 80vw;
   display:inline-block;
 }
+
+.options_section{
+  display:block;
+  width:100%;
+  margin-top:40px;
+  margin-bottom:40px;
+}
+
 </style>
+

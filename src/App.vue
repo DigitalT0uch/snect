@@ -27,3 +27,6 @@
   }
 }
 </style>
+
+<!-- Globaler import -->
+<style src="@/assets/css/style.css"></style>
