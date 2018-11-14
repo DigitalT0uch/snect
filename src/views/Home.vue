@@ -40,42 +40,65 @@ export default {
       }
   },
   mounted: function(){
-    const element = document.getElementById("map")
-    const options = {
-        zoom: 14,
-        center: new google.maps.LatLng(47.071467, 8.277621),
-        styles: style
-    }
-    this.map = new google.maps.Map(element, options);
 
 
-    /*************************** Start Markers ***************************/
+  const element = document.getElementById("map");
+  const options = {
+      zoom: 14,
+      center: new google.maps.LatLng(47.071467, 8.277621),
+      styles: style
+  }
+  this.map = new google.maps.Map(element, options);
+  let mapPref = this.map;
 
 
-    let marker = new google.maps.Marker({
-        position: {lat: 47.055193, lng: 8.317648},
-        icon: 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-rating-icon.png',
-        map: this.map
+    contentfulClient.getEntries()
+    .then(function (entries){
+
+      entries.items.forEach(function (entry) {
+        console.log(entry.fields);  
+          /*************************** Start Markers ***************************/
+          let iconUrl ="";
+          switch(entry.fields["iconType"]){
+            case "event":
+              iconUrl = 'http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-rating-icon.png';
+              break;
+            case "default":
+              break;
+          }
+
+          let latCord = entry.fields.lat;
+          let lngCord = entry.fields.long;
+
+          let marker = new google.maps.Marker({
+              position: {lat: latCord, lng: lngCord},
+              icon: iconUrl,
+              map: mapPref
+          });
+
+          marker.setMap(mapPref);
+
+
+          const contentString = `<div>
+            <h1>`+entry.fields.eventName+`</h1>
+            <div>`+entry.fields.descriptions+`</div> 
+          </div>`;
+
+          let infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+
+          marker.addListener('click', event => {
+            infowindow.open(mapPref, marker);
+          }); 
+
+          /***************************  END Markers  ***************************/
+
+
+      });
+
     });
-
-    marker.setMap(this.map);
-
-
-    const contentString = `<div>
-      <h1>Casineum, Grand Casino Luzern</h1>
-      <h2>Partey</h2>
-      <div>Gits eine?</div> 
-    </div>`;
-
-    let infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-
-    marker.addListener('click', event => {
-      infowindow.open(this.map, marker);
-    }); 
-
-    /***************************  END Markers  ***************************/
+   
 
   }
 };

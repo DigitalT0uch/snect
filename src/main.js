@@ -6,14 +6,14 @@ import {createClient} from 'contentful'
 Vue.config.productionTip = false;
 
 window.contentfulClient = createClient({
-  accessToken: '79aa451a69a502a0d00c7fb61264b273fcdc67c349bfb13613aa00306573c521',
-  space: 'k3mp96odf6se'
+  accessToken: 'fa06e8446827e704aa8bd292a83ea0edb272aea8511d09b5b50c40c1d13c02f1',
+  space: 'vqa5vjiwaxli'
 });
-
+/*
 contentfulClient.getEntries()
 .then((response) => console.log(response.items))
 .catch(console.error);
-
+*/
 new Vue({
   router,
   render: h => h(App)
