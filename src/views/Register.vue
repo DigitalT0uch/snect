@@ -41,8 +41,9 @@
 
       <p>
         <label for="profileimage">Profilbild</label>
-        <input id="profileimage" v-model="profileimage" type="file" name="email">
+        <input id="profileimage" type="file" name="profileimage" @change="displayImage">
       </p>
+      <img :src="imgSrc">
 
         <p>
         <input type="submit" value="Submit">
@@ -67,11 +68,13 @@ export default {
       lastname: "",
       gender: "",
       email: "",
+      file: {},
+      imgSrc: "",
       }
 
   },
   methods: {
-      addUser: function(){
+      addUser: function(pimage){
         contentfulManagementClient.getSpace('vqa5vjiwaxli')
           .then((space) => space.getEnvironment('master'))
           .then((environment) => environment.createEntry('user', {
@@ -87,6 +90,9 @@ export default {
               },
               email: {
                 'en-US' : this.email
+              },
+              profileImage: {
+                'en-US': pimage
               }
             }
           }))
@@ -94,26 +100,80 @@ export default {
           .then((entry)=> console.log(entry))
           .catch(console.error)
       },
-      uploadfile: function() {
-        contentfulManagementClient.getSpace('vqa5vjiwaxli').then((space) => space.getContentType('User')
-        .then((contentType) => contentType.getEnvironment('master')
-        .then((environment) => environment.createAssetFromFiles({
-          fields: {
-              file: {
-                'en-US': {
-                  contentType: 'image/jpeg',
-                  fileName: 'filename_english.jpg',
-                  file: createReadStream('path/to/filename_english.jpg')
-                },
-                'de-DE': {
-                  contentType: 'image/svg+xml',
-                  fileName: 'filename_german.svg',
-                  file: '<svg><path fill="red" d="M50 50h150v50H50z"/></svg>'
-                }
-              }
-          }
-        }))))
+
+      displayImage: function(event){
+        this.file = event.target.files[0];
+        let urlReader = new FileReader();
+        urlReader.onload = function(result) {
+            console.log(urlReader.result);
+            console.log(result);
+            this.imgSrc  = urlReader.result;
+        }.bind(this);
+        urlReader.readAsDataURL(this.file)
       },
+
+      uploadFile: function() {
+        let fileName = this.file.name;
+        let contentType = this.file.type;
+        let reader = new FileReader();
+        let spaceref;
+        reader.onload = function(result) {
+          contentfulManagementClient
+            .getSpace("vqa5vjiwaxli")
+            .then(space => {
+              spaceref = space;
+              return space.getEnvironment("master");
+            })
+            .then(environment =>
+              environment.createUpload({ file: reader.result })
+            )
+            .then(upload => {
+              console.log("creating asset...");
+              return spaceref
+                .createAsset({
+                  fields: {
+                    title: {
+                      "en-US": fileName
+                    },
+                    file: {
+                      "en-US": {
+                        fileName: fileName,
+                        contentType: contentType,
+                        uploadFrom: {
+                          sys: {
+                            type: "Link",
+                            linkType: "Upload",
+                            id: upload.sys.id
+                          }
+                        }
+                      }
+                    }
+                  }
+                })
+                .then(asset => {
+                  console.log("processing...");
+                  return asset.processForLocale("en-US", {
+                    processingCheckWait: 2000
+                  });
+                })
+                .then(asset => {
+                  console.log("publishing...");
+                  return asset.publish();
+                })
+                .then(asset => {
+                  console.log(asset);
+                  return asset;
+                });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+      };
+
+      // Read in the image file as a data URL.
+      //     reader.readAsDataURL(event.target.files[0]);
+      reader.readAsArrayBuffer(this.file);
+    },
       checkForm: function (e) {
         this.errors = [];
 
@@ -132,7 +192,8 @@ export default {
           this.errors.push('Valid email required.');
         }
         if (!this.errors.length) {
-          this.addUser();
+          var asset = this.uploadFile();
+          this.addUser(asset);
           return true;
         }
 
