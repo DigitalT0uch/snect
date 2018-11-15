@@ -2,7 +2,7 @@
     <div>
         <div class="options_section"> 
         <label class="switch">
-            <input v-on:click="changeMap" v-model="checked" id="mode_switch" type="checkbox">
+            <input v-on:click="changeMap" v-model="userMode" id="mode_switch" type="checkbox">
             <span class="slider round"></span>
         </label>
         </div>
@@ -23,15 +23,16 @@ export default {
   },
   data: function (){
       return {
-          checked : true,
+          userMode : true,
           userLat : 0,
-          userLng : 0
+          userLng : 0,
+          markers : []
       }
   },
   methods:{
     changeMap: function () {
-        this.checked = !this.checked;
-        if(this.checked){
+        this.userMode = !this.userMode;
+        if(this.userMode){
           style = mapstyles["lighttheme"];
         }else{
           style = mapstyles["darktheme"];
@@ -39,6 +40,8 @@ export default {
         this.map.setOptions({
           styles : style
         });
+        this.resetData();
+        this.displayData();
       },
       updateUserPosition: function(){
           if(navigator.geolocation){
@@ -48,17 +51,20 @@ export default {
           }
       },
       showPosition: function(position){
-          console.log("showposition: ");
             var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             // using global variable:
             this.map.panTo(center);
       },
       displayData: function(){
-          
             let mapPref = this.map;
-           contentfulClient.getEntries().then(function(entries) {
-            entries.items.forEach(function(entry) {
-                console.log(entry.fields);
+            var contentType = "";
+            if(this.userMode){
+                contentType = "user";
+            }else{
+                contentType = "events";
+            }
+           contentfulClient.getEntries({'content_type': contentType}).then((entries) => {
+            entries.items.forEach((entry) => {
                 /*************************** Start Markers ***************************/
                 let iconUrl = "";
                 switch (entry.fields["iconType"]) {
@@ -75,11 +81,11 @@ export default {
 
                 let marker = new google.maps.Marker({
                 position: { lat: latCord, lng: lngCord },
-                icon: iconUrl,
-                map: mapPref
+                    icon: iconUrl,
+                    map: mapPref
                 });
-
-                marker.setMap(mapPref);
+                this.markers.push(marker);
+                this.markers[this.markers.length -1].setMap(mapPref);
 
                 const contentString =
                 `<div>
@@ -98,7 +104,14 @@ export default {
                 /***************************  END Markers  ***************************/
             });
         });
-      }
+      },
+      resetData: function(){
+
+            this.markers.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            this.markers = [];
+        }
   },
   mounted: function() {
     const element = document.getElementById("map");
