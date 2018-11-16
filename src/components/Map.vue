@@ -78,7 +78,7 @@ export default {
                 if(this.userMode){
                     var profileimg = entry.fields.profileImage;
                     if(profileimg){
-                        console.log(profileimg.fields.file.url);
+                        //console.log(profileimg.fields.file.url);
                         profileimg = profileimg.fields.file.url;
                         
                     }
@@ -108,7 +108,7 @@ export default {
                         <p>` +  entry.fields.descriptions + `</p> 
                     </div>`;
                 }
-
+                console.log(entry);
                 let infowindow = new google.maps.InfoWindow({
                 content: contentString
                 });

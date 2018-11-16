@@ -56,13 +56,14 @@ export default {
           'fields.email': this.email
         })
         .then((entries)=>{
-
           entries.items.forEach((entry)=>{
-          if(entry.fields.password == this.password){
+          console.log(entry.sys.id);
+          if(entry.fields.password == this.password){        
+            document.cookie = "id="+entry.sys.id;
             document.cookie = "name="+entry.fields.name;
             document.cookie = "lastname="+entry.fields.lastname;
             document.cookie = "email="+entry.fields.email;
-            this.$router.push("/");
+            this.$router.push("/profilesettings");
           }
           else{
             this.seen = true;

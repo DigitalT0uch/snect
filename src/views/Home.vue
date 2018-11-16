@@ -23,6 +23,8 @@ export default {
     Logout
   },
   mounted: function(){
+    this.cUserName = cookies.getCookie("name");
+    this.cUserLastName = cookies.getCookie("lastname");
     this.cUserEmail = cookies.getCookie("email");
   },
   data: function() {
