@@ -70,6 +70,7 @@ export default {
       email: "",
       file: {},
       imgSrc: "",
+      imgId: 0
       }
 
   },
@@ -92,7 +93,13 @@ export default {
                 'en-US' : this.email
               },
               profileImage: {
-                'en-US': pimage
+                'en-US': {
+                  'sys': {
+                    'id': this.imgId,
+                    'linkType': 'Asset',
+                    'type': 'Link',
+                  }
+                }
               }
             }
           }))
@@ -105,8 +112,8 @@ export default {
         this.file = event.target.files[0];
         let urlReader = new FileReader();
         urlReader.onload = function(result) {
-            console.log(urlReader.result);
-            console.log(result);
+            //console.log(urlReader.result);
+            //console.log(result);
             this.imgSrc  = urlReader.result;
         }.bind(this);
         urlReader.readAsDataURL(this.file)
@@ -117,7 +124,7 @@ export default {
         let contentType = this.file.type;
         let reader = new FileReader();
         let spaceref;
-        reader.onload = function(result) {
+        reader.onload = (result)=>{
           contentfulManagementClient
             .getSpace("vqa5vjiwaxli")
             .then(space => {
@@ -161,7 +168,8 @@ export default {
                   return asset.publish();
                 })
                 .then(asset => {
-                  console.log(asset);
+                  this.imgId = asset.sys.id;
+                  this.addUser(asset);
                   return asset;
                 });
             })
@@ -192,8 +200,7 @@ export default {
           this.errors.push('Valid email required.');
         }
         if (!this.errors.length) {
-          var asset = this.uploadFile();
-          this.addUser(asset);
+          this.uploadFile();
           return true;
         }
 

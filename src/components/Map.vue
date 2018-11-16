@@ -68,14 +68,21 @@ export default {
                 /*************************** Start Markers ***************************/
                 let iconUrl = "";
                 switch (entry.fields["iconType"]) {
-                case "event":
-                    iconUrl =
-                    "http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-rating-icon.png";
-                    break;
-                case "default":
-                    break;
+                    case "event":
+                        iconUrl =
+                        "http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-rating-icon.png";
+                        break;
+                    case "default":
+                        break;
                 }
-
+                if(this.userMode){
+                    var profileimg = entry.fields.profileImage;
+                    if(profileimg){
+                        console.log(profileimg.fields.file.url);
+                        profileimg = profileimg.fields.file.url;
+                        
+                    }
+                }
                 let latCord = entry.fields.lat;
                 let lngCord = entry.fields.long;
 
@@ -86,12 +93,21 @@ export default {
                 });
                 this.markers.push(marker);
                 this.markers[this.markers.length -1].setMap(mapPref);
-
-                const contentString =
-                `<div>
-                    <h1>` + entry.fields.eventName + `</h1>
-                    <p>` +  entry.fields.descriptions + `</p> 
-                </div>`;
+                let contentString ="";
+                if(this.userMode){
+                     contentString = `<div class="markerbox">
+                     <img class="profileimg" src="`+profileimg+`" />
+                        <h1>` + entry.fields.name +` ` + entry.fields.lastname + `</h1>
+                        <p>` +entry.fields.birthday+   `</p> 
+                        <p>` +entry.fields.university+ ` ` + entry.fields.city +  `</p> 
+                    </div>`;
+                }else{
+                    contentString =
+                    `<div>
+                        <h1>` + entry.fields.eventName + `</h1>
+                        <p>` +  entry.fields.descriptions + `</p> 
+                    </div>`;
+                }
 
                 let infowindow = new google.maps.InfoWindow({
                 content: contentString
@@ -137,5 +153,14 @@ export default {
     height: 80vh;
     width: 80vw;
     display:inline-block;
+    }
+</style>
+
+<style lang="scss">
+    #map{
+        .profileimg{
+            border-radius: 50%;
+            max-width:200px;
+        }
     }
 </style>

@@ -59,7 +59,10 @@ export default {
 
           entries.items.forEach((entry)=>{
           if(entry.fields.password == this.password){
-            this.$router.push("/homescreen");
+            document.cookie = "name="+entry.fields.name;
+            document.cookie = "lastname="+entry.fields.lastname;
+            document.cookie = "email="+entry.fields.email;
+            this.$router.push("/");
           }
           else{
             this.seen = true;
