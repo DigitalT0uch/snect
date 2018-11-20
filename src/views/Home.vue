@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Logout />
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img class="logo" alt="Snect logo" src="../assets/snect_logo.svg">
     <HelloWorld msg="SNECT"/>
     <p> Email: {{cUserEmail}} </p>
     <Map />
