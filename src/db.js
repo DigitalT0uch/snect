@@ -25,19 +25,18 @@ export default {
         window.contentfulManagementClient.getSpace('vqa5vjiwaxli')
         .then((space)=>{
           space.getEntry(cookies.getCookie("id"))
-          .then((entry)=>{
-              console.log(userMusic);
+          .then(async (entry)=>{
+              
+             let music = {'en-US':[]};
               for(var i = 0; i < userMusic.length; i++){
-                  console.log(userMusic[i]);
+                  //console.log(userMusic[i]);
                 if(userMusic[i].checked){
-                    console.log('getGenreIDBRA');
-                    var gID = this.getGenreId(userMusic[i].name)
-                    console.log(gID);
+                    //console.log("get Genre with name: "+userMusic[i].name);
+                    var gID = await this.getGenreId(userMusic[i].name);
+                    music['en-US'].push({sys:{id:gID, linkType:'Entry', type: 'Link'}});
                 }
               }
-            //console.log(entry);
             //let music = {'en-US':[{sys:{id:"4wcSKrltAI2eao2WIgiais", linkType:'Entry', type: 'Link'}}]};
-            let music = {'en-US':[{sys:{id:"4wcSKrltAI2eao2WIgiais", linkType:'Entry', type: 'Link'}}]};
             entry.fields.music = music;
             return entry.update();
             //return null;
@@ -45,20 +44,44 @@ export default {
         })
     },
     updateUserActivities: function(userActivities){
-        
+        window.contentfulManagementClient.getSpace('vqa5vjiwaxli')
+        .then((space)=>{
+          space.getEntry(cookies.getCookie("id"))
+          .then(async (entry)=>{
+              
+             let activities = {'en-US':[]};
+              for(var i = 0; i < userActivities.length; i++){
+                  //console.log(userMusic[i]);
+                if(userActivities[i].checked){
+                    //console.log("get Genre with name: "+userActivities[i].name);
+                    var gID = await this.getActivityId(userActivities[i].name);
+                    activities['en-US'].push({sys:{id:gID, linkType:'Entry', type: 'Link'}});
+                }
+              }
+            //let activities = {'en-US':[{sys:{id:"4wcSKrltAI2eao2WIgiais", linkType:'Entry', type: 'Link'}}]};
+            entry.fields.activities = activities;
+            return entry.update();
+            //return null;
+          }).then(entry =>{ return entry.publish();})
+        })
     },
     getGenreId: function(name){
-        window.contentfulClient.getEntries({
+        return window.contentfulClient.getEntries({
             'content_type': 'music',
-            'fields.name': this.name
+            'fields.genre': name
           })
           .then((entries)=>{
-            entries.items.forEach((entry)=>{
-                console.log('test');
-                console.log(entry);
-                return entry.sys.id;
+            return entries.items[0].sys.id;
+        });
+    },
 
-            });
+    getActivityId: function(name){
+        return window.contentfulClient.getEntries({
+            'content_type': 'activities',
+            'fields.activity': name
+          })
+          .then((entries)=>{
+            return entries.items[0].sys.id;
         });
     }
   };

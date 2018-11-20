@@ -104,7 +104,10 @@ export default {
             }
           }))
           .then((entry) => entry.publish())
-          .then((entry)=> console.log(entry))
+          .then((entry)=> {
+            console.log(entry)
+            this.$router.push("/profilesettings");
+            })
           .catch(console.error)
       },
 
@@ -169,6 +172,7 @@ export default {
                 })
                 .then(asset => {
                   this.imgId = asset.sys.id;
+                  console.log('call adduser');
                   this.addUser(asset);
                   return asset;
                 });

@@ -59,9 +59,10 @@ export default {
     },
     updateUserMusic: function(){
         db.updateUserMusic(this.music);
+        this.nextStep();
     },
     updateUserActivity: function(){
-
+        db.updateUserActivities(this.activities);
     }
   }
 };
