@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="options_section"> 
-        <label class="switch">
-            <input v-on:click="changeMap" v-model="userMode" id="mode_switch" type="checkbox">
-            <span class="slider round"></span>
-        </label>
+
         </div>
         <div id="map"></div>
+            <div v-on:click="changeMapToPeople">People</div>
+            <div v-on:click="changeMapToEvents">Events</div>
+
     </div>
 </template>
 
@@ -16,14 +16,13 @@
 import mapstyles from "@/styles.js";
 import shared from "@/shared.js";
 
-let style = mapstyles["lighttheme"];
-
 export default {
   name: "Map",
   props: {
   },
   data: function (){
       return {
+          style : {},
           userMode : true,
           userLat : 0,
           userLng : 0,
@@ -32,14 +31,13 @@ export default {
   },
   methods:{
     changeMap: function () {
-        this.userMode = !this.userMode;
-        if(this.userMode){
-          style = mapstyles["lighttheme"];
+        if(this.userMode == true){
+          this.style = mapstyles["lighttheme"];
         }else{
-          style = mapstyles["darktheme"];
+          this.style = mapstyles["darktheme"];
         }
         this.map.setOptions({
-          styles : style
+          styles : this.style
         });
         this.resetData();
         this.displayData();
@@ -126,6 +124,18 @@ export default {
         });
         
       },
+      changeMapToPeople: function(){
+          if(!this.userMode){
+              this.userMode = true;
+              this.changeMap();
+          }
+      },
+      changeMapToEvents: function(){
+          if(this.userMode){
+              this.userMode = false;
+              this.changeMap();
+          }
+      },
       resetData: function(){
 
             this.markers.forEach(function(marker) {
@@ -138,11 +148,19 @@ export default {
     const element = document.getElementById("map");
 
     this.updateUserPosition();
-
+    if(this.$route.params.pref){
+        if(this.$route.params.pref == "people"){
+            this.userMode = true;
+            this.style = mapstyles["lighttheme"];
+        }else if(this.$route.params.pref=="events"){
+            this.userMode = false;          
+            this.style = mapstyles["darktheme"];
+        }
+    }
     const options = {
       zoom: 14,
       center: new google.maps.LatLng(this.userLat, this.userLng),
-      styles: style
+      styles: this.style
     };
 
     this.map = new google.maps.Map(element, options);

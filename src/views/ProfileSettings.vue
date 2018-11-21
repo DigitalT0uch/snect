@@ -63,6 +63,7 @@ export default {
     },
     updateUserActivity: function(){
         db.updateUserActivities(this.activities);
+        this.$router.push("/lookingfor");
     }
   }
 };
