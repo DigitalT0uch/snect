@@ -1,12 +1,16 @@
 <template>
     <div>
-        <div class="options_section"> 
-
+        <div class="grid-x">
+            <div class="cell small-12">
+                <div id="map"></div>
+            </div>
         </div>
-        <div id="map"></div>
-            <div v-on:click="changeMapToPeople">People</div>
-            <div v-on:click="changeMapToEvents">Events</div>
-
+        <div class="fixed_bottom">
+             <div class="options_section"> 
+                <div id="option_people" v-bind:class="{active: userMode}" class="hCursor map_option" v-on:click="changeMapToPeople">People</div>
+                <div id="option_events"  v-bind:class="{active: !userMode}"  class="hCursor map_option" v-on:click="changeMapToEvents">Events</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -125,16 +129,18 @@ export default {
         
       },
       changeMapToPeople: function(){
+          console.log(this.userMode);
           if(!this.userMode){
               this.userMode = true;
-              this.changeMap();
+
           }
+        this.changeMap();
       },
       changeMapToEvents: function(){
           if(this.userMode){
               this.userMode = false;
-              this.changeMap();
           }
+           this.changeMap();
       },
       resetData: function(){
 
@@ -180,13 +186,14 @@ export default {
 <style scoped lang="scss">
     #map {
     height: 80vh;
-    width: 80vw;
+    width: 100vw;
     display:inline-block;
     }
 </style>
 
 <style lang="scss">
     #map{
+        bottom: -20px;
         .profileimg{
             border-radius: 50%;
             max-width:200px;
@@ -196,6 +203,31 @@ export default {
         }
         #markerLayer img {
            border-radius:30px;
+        }
+    }
+
+    .fixed_bottom{
+        position: absolute;
+        width:100%;
+        bottom: 0;
+        background-color: rgba(50,50,50,0.5);
+       
+        .map_option{
+            display: inline-block;
+            width: 50%;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 10px;
+        }
+        #option_people{
+            &.active{
+                color:#a06a2c;
+            }
+        }
+        #option_events{
+            &.active{
+                color:#e6475f;
+            }
         }
     }
 </style>
