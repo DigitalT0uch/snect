@@ -14,6 +14,7 @@
 <script>
 
 import mapstyles from "@/styles.js";
+import shared from "@/shared.js";
 
 let style = mapstyles["lighttheme"];
 
@@ -80,46 +81,50 @@ export default {
                     if(profileimg){
                         //console.log(profileimg.fields.file.url);
                         profileimg = profileimg.fields.file.url;
-                        
+                        iconUrl = profileimg;
                     }
                 }
                 let latCord = entry.fields.lat;
                 let lngCord = entry.fields.long;
 
                 let marker = new google.maps.Marker({
-                position: { lat: latCord, lng: lngCord },
-                    icon: iconUrl,
-                    map: mapPref
-                });
+                    position: { lat: latCord, lng: lngCord },
+                        icon: {
+                            url: iconUrl,
+                            scaledSize: new google.maps.Size(64, 64)
+                            },
+                        map: mapPref,
+                        optimized: false
+                    });
                 this.markers.push(marker);
-                this.markers[this.markers.length -1].setMap(mapPref);
+                //this.markers[this.markers.length -1].setMap(mapPref);
                 let contentString ="";
                 if(this.userMode){
-                     contentString = `<div class="markerbox">
-                     <img class="profileimg" src="`+profileimg+`" />
-                        <h1>` + entry.fields.name +` ` + entry.fields.lastname + `</h1>
-                        <p>` +entry.fields.birthday+   `</p> 
-                        <p>` +entry.fields.university+ ` ` + entry.fields.city +  `</p> 
-                    </div>`;
+                    shared.users[entry.sys.id]=
+                    {
+                        profileimg: profileimg,
+                        fields:  entry.fields
+                    };
+                    
+                    marker.addListener("click", event => {
+                        this.$router.push("/user/"+entry.sys.id);
+                    });
                 }else{
-                    contentString =
-                    `<div>
-                        <h1>` + entry.fields.eventName + `</h1>
-                        <p>` +  entry.fields.descriptions + `</p> 
-                    </div>`;
+                     shared.events[entry.sys.id]=
+                    {
+                        profileimg: profileimg,
+                        fields:  entry.fields
+                    };
+                    marker.addListener("click", event => {
+                        this.$router.push("/events/"+entry.sys.id);
+                    });
                 }
-                console.log(entry);
-                let infowindow = new google.maps.InfoWindow({
-                content: contentString
-                });
 
-                marker.addListener("click", event => {
-                    infowindow.open(mapPref, marker);
-                });
 
                 /***************************  END Markers  ***************************/
             });
         });
+        
       },
       resetData: function(){
 
@@ -142,6 +147,12 @@ export default {
 
     this.map = new google.maps.Map(element, options);
 
+    var myoverlay = new google.maps.OverlayView();
+        myoverlay.draw = function () {
+            this.getPanes().markerLayer.id='markerLayer';
+        };
+        myoverlay.setMap(this.map);
+
     //this function needs to be somewhere else. firefox can't display the data.
     this.displayData();
   }
@@ -161,6 +172,12 @@ export default {
         .profileimg{
             border-radius: 50%;
             max-width:200px;
+        }
+        .location img {
+           border-radius:10px;
+        }
+        #markerLayer img {
+           border-radius:30px;
         }
     }
 </style>

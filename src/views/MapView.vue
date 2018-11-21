@@ -1,7 +1,6 @@
 <template>
   <div class="map">
     <Logout />
-    <img class="logo" alt="Snect logo" src="../assets/snect_logo.svg">
     <p> Email: {{cUserEmail}} </p>
     <Map />
   </div>

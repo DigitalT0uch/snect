@@ -206,6 +206,17 @@ let mapstyles =
         ]
       },
       {
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#f0f0f0"
+          },
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
         "elementType": "labels.icon",
         "stylers": [
           {
@@ -267,15 +278,6 @@ let mapstyles =
       },
       {
         "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#d3e8e1"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
         "elementType": "labels.text.fill",
         "stylers": [
           {
@@ -289,6 +291,24 @@ let mapstyles =
         "stylers": [
           {
             "color": "#ffffff"
+          }
+        ]
+      },
+      {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#c8c8c8"
+          }
+        ]
+      },
+      {
+        "featureType": "road.arterial",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
           }
         ]
       },
@@ -315,7 +335,10 @@ let mapstyles =
         "elementType": "geometry.fill",
         "stylers": [
           {
-            "color": "#d5d5d5"
+            "color": "#c8c8c8"
+          },
+          {
+            "visibility": "on"
           }
         ]
       },
@@ -356,6 +379,15 @@ let mapstyles =
         ]
       },
       {
+        "featureType": "transit.station.rail",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#c8c8c8"
+          }
+        ]
+      },
+      {
         "featureType": "water",
         "elementType": "geometry",
         "stylers": [
@@ -369,7 +401,10 @@ let mapstyles =
         "elementType": "geometry.fill",
         "stylers": [
           {
-            "color": "#dfeff6"
+            "color": "#dcdcdc"
+          },
+          {
+            "visibility": "on"
           }
         ]
       },
