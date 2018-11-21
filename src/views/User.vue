@@ -120,18 +120,24 @@ export default {
 .chatbtn{
     
        border-radius: 50%;
+       flex: 1 1 auto;
         margin-top: 95px;
         padding: 0px;
         text-align: center;
         text-transform: uppercase;
         transition: 0.5s;
+        background-size: 200% auto;
         img{padding: 15px;}
         color: white;
       /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
         border-bottom:none;
  
         /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
-        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 100%);
+        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
+
+        &:hover{
+          background-position: right center; /* change the direction of the change here */
+        }
 }
 
 </style>
