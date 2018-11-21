@@ -4,7 +4,6 @@
           <div class="grid-x">
             <div class="cell small-6 small-offset-3"> 
                 <img v-bind:src= "currentUserImage" class="roundImage profileimage"/>  
-        
             </div>
          </div>
     
