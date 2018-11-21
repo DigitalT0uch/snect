@@ -1,6 +1,6 @@
 <template>
     <div id="logout">
-        <button v-if="this.cUserEmail != ''" v-on:click="logout"></button>
+        <button v-if="this.cUserEmail != ''" v-on:click="logout">Logout</button>
     </div>
 </template>
 

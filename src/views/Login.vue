@@ -81,7 +81,7 @@ export default {
             document.cookie = "name="+entry.fields.name;
             document.cookie = "lastname="+entry.fields.lastname;
             document.cookie = "email="+entry.fields.email;
-            this.$router.push("/map");
+            this.$router.push("/lookingfor");
           }
           else{
             this.seen = true;
