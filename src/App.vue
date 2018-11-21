@@ -15,11 +15,13 @@
 <style src="@/assets/css/style.css"></style>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 body{
   background-color:#323232;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+font-family: 'Raleway', sans-serif;
+letter-spacing: 0.08rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

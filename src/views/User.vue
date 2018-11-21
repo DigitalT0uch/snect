@@ -1,13 +1,29 @@
 <template>
   <div>
-    <img v-bind:src= "currentUserImage" />
+      <div class="grid-container full">
+          <div class="grid-x">
+            <div class="cell small-6 small-offset-3"> 
+                <img v-bind:src= "currentUserImage" class="roundImage profileimage"/>  
+        
+            </div>
+         </div>
+    
+
     <div class="mainInfo">
-        <span>{{currentUser.name}}</span>
-        <span>{{currentUser.lastname}}</span>
-        <span>{{age}}</span>
+        <h1> {{currentUser.name}} {{currentUser.lastname}} {{age}}</h1>
+
     </div>
+
+    <div class="schoolInfo">
+        <h3> {{currentUser.city}} </h3>
+        </div>
+
+
+
+
     <div class="schoolInfo">
         <span>{{currentUser.university}}</span>
+    
         <span>{{currentUser.city}}</span>
     </div>
     <div class="activities">
@@ -29,6 +45,7 @@
     <div class="chatbtn">
         <button>CHAT</button>
         </div>
+    </div><!--end container-->
   </div>
 </template>
 
@@ -73,5 +90,11 @@ export default {
 
 <style scoped lang="scss">
 
+.roundImage{
+    border-radius: 50%;
+    }
+.profileimage{
+        margin-bottom: 8px;
+    }
 
 </style>
