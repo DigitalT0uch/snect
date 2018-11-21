@@ -22,6 +22,7 @@ export default {
   },
   data: function (){
       return {
+          style : {},
           userMode : true,
           userLat : 0,
           userLng : 0,
@@ -31,12 +32,12 @@ export default {
   methods:{
     changeMap: function () {
         if(this.userMode == true){
-          style = mapstyles["lighttheme"];
+          this.style = mapstyles["lighttheme"];
         }else{
-          style = mapstyles["darktheme"];
+          this.style = mapstyles["darktheme"];
         }
         this.map.setOptions({
-          styles : style
+          styles : this.style
         });
         this.resetData();
         this.displayData();
@@ -147,20 +148,19 @@ export default {
     const element = document.getElementById("map");
 
     this.updateUserPosition();
-    let style;
     if(this.$route.params.pref){
         if(this.$route.params.pref == "people"){
             this.userMode = true;
-            style = mapstyles["lighttheme"];
+            this.style = mapstyles["lighttheme"];
         }else if(this.$route.params.pref=="events"){
             this.userMode = false;          
-            style = mapstyles["darktheme"];
+            this.style = mapstyles["darktheme"];
         }
     }
     const options = {
       zoom: 14,
       center: new google.maps.LatLng(this.userLat, this.userLng),
-      styles: style
+      styles: this.style
     };
 
     this.map = new google.maps.Map(element, options);
