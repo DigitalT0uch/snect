@@ -7,24 +7,29 @@
         
             </div>
          </div>
-    
+    <div class="grid-x">
+        <div class="cell small-10 small-offset-1">
+            <div class="mainInfo">
+                <h1> {{currentUser.name}} {{currentUser.lastname}} {{age}}</h1>
+            </div>
 
-    <div class="mainInfo">
-        <h1> {{currentUser.name}} {{currentUser.lastname}} {{age}}</h1>
-
+            <div class="city">
+                <h3> {{currentUser.city}} </h3>
+            </div>
+        </div>
     </div>
 
-    <div class="schoolInfo">
-        <h3> {{currentUser.city}} </h3>
-        </div>
-
-
-
-
-    <div class="schoolInfo">
-        <span>{{currentUser.university}}</span>
     
-        <span>{{currentUser.city}}</span>
+
+
+
+    <div class="grid-x">
+        <div class="cell small-10 small-offset-1">
+            <div class="schoolInfo">
+                <h3>{{currentUser.university}} {{currentUser.city}}</h3>
+             </div>
+        </div>
+    
     </div>
     <div class="activities">
         <div id="activitylist" class="demo">
@@ -42,11 +47,16 @@
         </div>
     </div>
 
-    <div class="chatbtn">
-        <button>CHAT</button>
+
+<div class="grid-x">
+        <div class="cell small-2 small-offset-5 chat">
+        <div class="chatbtn">
+            <img src="../assets/white_chat.svg">
         </div>
     </div><!--end container-->
   </div>
+  </div>
+    </div>
 </template>
 
 
@@ -89,12 +99,39 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.mainInfo{
+    h1{
+        margin-bottom: 0px;
+    }
+}
 .roundImage{
     border-radius: 50%;
     }
 .profileimage{
         margin-bottom: 8px;
     }
+.city{
+    h3 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    }
+}
+
+.chatbtn{
+    
+       border-radius: 50%;
+        margin-top: 95px;
+        padding: 0px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        img{padding: 15px;}
+        color: white;
+      /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+        border-bottom:none;
+ 
+        /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
+        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 100%);
+}
 
 </style>
