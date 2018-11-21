@@ -10,6 +10,10 @@
   </div>
 </template>
 
+<!-- Globaler import -->
+<style src="@/assets/css/foundation.css"></style>
+<style src="@/assets/css/style.css"></style>
+
 <style lang="scss">
 body{
   background-color:#323232;
@@ -37,6 +41,4 @@ img.snect_logo{
 }
 </style>
 
-<!-- Globaler import -->
-<style src="@/assets/css/style.css"></style>
-<style src="@/assets/css/foundation.css"></style>
+
