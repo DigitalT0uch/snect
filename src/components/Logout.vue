@@ -27,7 +27,7 @@ export default {
         cookies.deleteCookie("email");
         cookies.deleteCookie("name");
         cookies.deleteCookie("lastname");
-        this.$router.go();
+        this.$router.push("/");
       }
   }
 };

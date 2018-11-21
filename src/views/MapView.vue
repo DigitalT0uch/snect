@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="map">
     <Logout />
     <img class="logo" alt="Snect logo" src="../assets/snect_logo.svg">
     <p> Email: {{cUserEmail}} </p>
@@ -9,15 +9,13 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 import Map from "@/components/Map.vue";
 import Logout from "@/components/Logout.vue";
 import cookies from "@/cookies.js";
 
 export default {
-  name: "home",
+  name: "mapview",
   components: {
-    HelloWorld,
     Map,
     Logout
   },

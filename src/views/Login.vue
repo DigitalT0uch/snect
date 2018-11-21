@@ -31,11 +31,15 @@
         <input class="submitbtn" type="submit" value="Submit">
         </p>
     </form>
+    <div class="register_wrapper">
+      <p>New to SNECT?  <router-link to="register" class="register">Sign up</router-link></p>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import cookies from "@/cookies.js";
 
 export default {
   name: "login",
@@ -43,16 +47,28 @@ export default {
   },
    data:function (){
       return {
-      errors: [],
-      seen: false,
-      email: "",
-      password: ""
+        errors: [],
+        seen: false,
+        email: "",
+        password: "",
+        cUserName : "",
+        cUserLastName : "",
+        cUserEmail : "",
       }
 
   },
+  mounted: function(){
+    this.cUserName = cookies.getCookie("name");
+    this.cUserLastName = cookies.getCookie("lastname");
+    this.cUserEmail = cookies.getCookie("email");
+    
+    console.log(this.cUserEmail);
+    if(this.cUserEmail != ''){
+            this.$router.push("/map");
+    }
+  },
   methods: {
     login: function(){
-
           window.contentfulClient.getEntries({
           'content_type': 'user',
           'fields.email': this.email
@@ -65,7 +81,7 @@ export default {
             document.cookie = "name="+entry.fields.name;
             document.cookie = "lastname="+entry.fields.lastname;
             document.cookie = "email="+entry.fields.email;
-            this.$router.push("/profilesettings");
+            this.$router.push("/map");
           }
           else{
             this.seen = true;
@@ -102,62 +118,72 @@ export default {
  .logo{
    width:300px;
  }
-}
-#login{
-   input{
-    width: 80%;
+  #login{
+    input{
+      width: 80%;
 
-    margin: 8px 0;
-    
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    
-    border:none;
-    border-bottom:1px solid #fff;
+      margin: 8px 0;
+      
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      
+      border:none;
+      border-bottom:1px solid #fff;
 
-    background-color:#323232;
+      background-color:#323232;
 
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  .submitbtn{
-      width:70%;
-      flex: 1 1 auto;
-      margin: 10px;
-      padding: 20px;
-      text-align: center;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-      color: white;
-    /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-      border-bottom:none;
-      border-radius: 30px;
-      /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
-      background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
+      display: inline-block;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .submitbtn{
+        width:70%;
+        flex: 1 1 auto;
+        margin: 10px;
+        padding: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+      /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+        border-bottom:none;
+        border-radius: 30px;
+        /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
+        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
 
-      &:hover{
-         background-position: right center; /* change the direction of the change here */
+        &:hover{
+          background-position: right center; /* change the direction of the change here */
+        }
+    }
+    .fp-wrapper{
+      &:after{
+        content: '';
+        display: block;
+        clear: both;
       }
-  }
-  .fp-wrapper{
-    &:after{
-      content: '';
-      display: block;
-      clear: both;
+      a.forgotpw{
+        color:#a0a0a0;
+        text-decoration: none;
+        font-size:12px;
+        margin-right:10%;
+        float:right;
+      }
     }
-    a.forgotpw{
-      color:#a0a0a0;
-      text-decoration: none;
-      font-size:12px;
-      margin-right:10%;
-      float:right;
-    }
-  }
 
+  }
+  .register_wrapper{
+    font-size: 12px;
+    text-align: center;
+    display: block;
+    color:#a0a0a0;
+    a.register{
+      color:#fff;
+      text-decoration: none;
+    }
+  }
 }
 </style>
