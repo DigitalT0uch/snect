@@ -25,6 +25,10 @@
             </span>
         </div>
     </div>
+
+    <div class="chatbtn">
+        <button>CHAT</button>
+        </div>
   </div>
 </template>
 
