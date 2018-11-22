@@ -9,6 +9,11 @@
              <div class="options_section"> 
                 <div id="option_people" v-bind:class="{active: userMode}" class="hCursor map_option" v-on:click="changeMapToPeople">People</div>
                 <div id="option_events"  v-bind:class="{active: !userMode}"  class="hCursor map_option" v-on:click="changeMapToEvents">Events</div>
+                <div class="chatcontainer">
+                    <div class="chatbtn">
+                        <img src="../assets/white_chat.svg">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -185,9 +190,9 @@ export default {
 
 <style scoped lang="scss">
     #map {
-    height: 80vh;
-    width: 100vw;
-    display:inline-block;
+        height: 80vh;
+        width: 96vw;
+        display:inline-block;
     }
 </style>
 
@@ -210,7 +215,7 @@ export default {
         position: absolute;
         width:100%;
         bottom: 0;
-        background-color: rgba(50,50,50,0.5);
+        background-color: rgba(50,50,50,0.8);
        
         .map_option{
             display: inline-block;
@@ -229,5 +234,33 @@ export default {
                 color:#e6475f;
             }
         }
+        .chatcontainer{
+            position: absolute;
+            width:100%;
+            height: 44px;
+            bottom:44px;
+            .chatbtn{
+                display:inline-block;
+                text-align:center;
+                width:50px;
+                height:50px;
+                border-radius: 50%;
+                padding: 0px;
+                text-align: center;
+                text-transform: uppercase;
+                transition: 0.5s;
+                color: white;
+                cursor:pointer;
+                margin-top:27px;
+                /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+                border-bottom:none;
+                /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
+                background-image: linear-gradient(to right, #e6475f 0%, #ef8138 100%);
+                img{
+                    padding: 10px;
+                    }
+            }
+        }
+       
     }
 </style>

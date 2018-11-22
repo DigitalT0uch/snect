@@ -153,6 +153,7 @@ export default {
         transition: 0.5s;
         background-size: 200% auto;
         color: white;
+        cursor:pointer;
       /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
         border-bottom:none;
         border-radius: 30px;
