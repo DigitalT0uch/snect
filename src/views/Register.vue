@@ -1,10 +1,8 @@
 <template>
   <div class="register">
      <div class="grid-container full">
-          <div class="grid-x">
-            
-          </div>
-          <div class="grid-x">
+
+          <div class="grid-x warumnidfullbra">
            <div class="cell small-10 small-offset-1">
               <form
                 id="register"
@@ -12,7 +10,7 @@
                 novalidate="true"
               >
 
-                <p v-if="errors.length">
+                <p v-if="errors.length" id="errors">
                   <b>Please correct the following error(s):</b>
                   <ul>
                     <li v-for="error in errors">{{ error }}</li>
@@ -20,17 +18,12 @@
                 </p> 
 
                 <p>
-                  <label for="profileimage">Profilbild</label>
                   <input id="profileimage" type="file" name="profileimage" @change="displayImage" >
                 </p>
                 <img :src="imgSrc">
 
                 <p>
-                  <input id="name" v-model="name" type="text" name="name" placeholder="Firstname Lastname" >
-                </p>
-
-                <p>
-                  <input id="city" v-model="city" type="text" name="city"  placeholder="City">
+                  <input id="name" v-model="name" type="text" name="name" placeholder="Name" >
                 </p>
                 
                 <p>
@@ -75,11 +68,9 @@ export default {
       errors: [],
       name: "",
       email: "",
-      city: "",
       university:"",
       courseOfStudies:"",
       password:"",
-      password2:"",
       file: {},
       imgSrc: "",
       imgId: 0
@@ -97,9 +88,6 @@ export default {
               },
               lastname: {
                 'en-US': this.lastname
-              },
-              city:{
-                'en-US' : this.city
               },
               email: {
                 'en-US' : this.email
@@ -221,9 +209,6 @@ export default {
         } else if (!this.validEmail(this.email)) {
           this.errors.push('Valid email required.');
         }
-        if (!this.city) {
-          this.errors.push("City required.");
-        }
         if (!this.university) {
           this.errors.push("University required.");
         }
@@ -257,14 +242,14 @@ export default {
 
 <style scoped lang="scss">
 
+
 #register{
-    input{
+    input:not([type='submit']){
       width: 100%;
 
-      margin: 2px 0;
+      margin: 5px 0;
       
       padding-left: 5px;
-      padding-right: 20px;
       padding-top: 12px;
       padding-bottom: 6px;
       
@@ -281,29 +266,31 @@ export default {
       color: #fff;
 
       &:focus {outline: none;}
-
     }
+
     .submitbtn{
-        width:100%;
-        flex: 1 1 auto;
-        margin: 10px;
-        padding: 20px;
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        cursor:pointer;
-      /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-        border-bottom:none;
-        border-radius: 30px;
-        /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
-        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
+      width: 80%;
+      margin-top: 20px;
 
-        &:hover{
-          background-position: right center; /* change the direction of the change here */
-        }
     }
+
+
+    #errors{
+          margin-top: 40px;
+          color: #e6475f;
+              width: 100%;
+        li{
+          list-style: none;
+          color: #e6475f;
+    text-align: center;
+        }
+      }
+
+      #profileimage{
+        margin-top: 50px;
+      }
+
+    
     .fp-wrapper{
       &:after{
         content: '';
@@ -320,5 +307,8 @@ export default {
     }
 
   }
+      .warumnidfullbra{
+      width: 100%;
+      }
 
 </style>
