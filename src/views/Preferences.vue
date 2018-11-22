@@ -1,6 +1,8 @@
 <template>
     <div class="grid-container full preferences">
 
+       <h1>What are <br> you up to? </br></h1>
+
 
       <div class="grid-x warumnidfullbra">
         <div class="cell small-10 small-offset-1">
@@ -149,8 +151,7 @@ export default {
 }
   .activities{
     display:inline-flex;
-    margin: 5px;
-    margin-left: 0;
+    margin: 1px 6px 0px 0px;
     float: left;
     cursor:pointer;
     .select{
@@ -197,6 +198,10 @@ export default {
   .select{
     display:inline-flex;
     border-radius: 30px;
+  }
+
+  .submitbtn{
+    margin-top: 120px;
   }
 
 </style>
