@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" v-if="$route.name != 'login'">
+      <a href="javascript:history.go(-1)" class="backlink"> <img class="navicon" src="@/assets/icons/white_back.svg"/></a>
+      <div class="navright">
+        <router-link to="/" v-if="$route.name != 'register' && $route.name != 'lookingfor' && $route.name != 'user'"><img src="@/assets/icons/white_filter.svg" class="navicon"/></router-link>
+        <router-link to="/"><img src="@/assets/icons/white_settings.svg" class="navicon" /></router-link>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -26,7 +29,7 @@ body{
   color: #ffffff;
 }
 #nav {
-  padding: 30px;
+  padding: 15px;
   a {
     font-weight: bold;
     color: #2c3e50;
@@ -38,6 +41,20 @@ body{
 
 img.snect_logo{
   width:300px;
+}
+.backlink{
+  float: left;
+}
+
+.navright{
+  float:right;
+  a{
+    margin:10px;
+  }
+}
+.navicon{
+    width: 15px;
+    height:15px;
 }
 </style>
 
