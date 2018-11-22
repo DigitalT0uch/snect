@@ -154,6 +154,8 @@ export default {
     float: left;
     .select{
       padding: 5px;
+      padding-left:8px;
+      padding-right:8px;
       border: 1px solid white;
     }
     &.activities_checked{
@@ -175,6 +177,8 @@ export default {
     float: left;
     .select{
       padding: 5px;
+      padding-left:8px;
+      padding-right:8px;
       border: 1px solid white;
     }
     &.music_checked{
