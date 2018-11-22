@@ -64,6 +64,9 @@ img.snect_logo{
         padding: 20px;
         text-align: center;
         text-transform: uppercase;
+          font-size: 4.75vw;
+  font-weight: 700;
+  letter-spacing: 0.6vw; 
         transition: 0.5s;
         background-size: 200% auto;
         color: white;
@@ -78,7 +81,7 @@ img.snect_logo{
           background-position: right center; /* change the direction of the change here */
         }
     }
-    
+
 </style>
 
 
