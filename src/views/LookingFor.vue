@@ -42,4 +42,10 @@ export default {
 
 <style scoped lang="scss">
 
+.lookingfor{
+  h1{
+  
+    margin-bottom: 200px;}
+}
+
 </style>
