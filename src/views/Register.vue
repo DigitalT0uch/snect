@@ -22,28 +22,14 @@
                 </p>
 
                 <p>
+                  <label for="profileimage">Profilbild</label>
+                  <input id="profileimage" type="file" name="profileimage" @change="displayImage" >
+                </p>
+                <img :src="imgSrc">
+
+                <p>
                   <label for="name">Name</label>
-                  <input id="name" v-model="name" type="text" name="name" placeholder="Name" >
-                </p>
-
-                <p>
-                  <label for="lastname">Lastname</label>
-                  <input id="lastname" v-model="lastname" type="text" name="lastname"  placeholder="Lastname">
-                </p>
-
-                <p>
-                  <label for="lastname">Gender</label>
-                      <select id="gender" v-model="gender" name="gender">
-                        <option value="" disabled selected>Select your gender</option>
-                        <option>male</option>
-                        <option>female</option>
-                        <option>other</option>
-                      </select>
-                </p>
-                
-                <p>
-                  <label for="birthday">Birthday</label>
-                  <input id="birthday" v-model="birthday" type="date" name="birthday"  placeholder="Birthday">
+                  <input id="name" v-model="name" type="text" name="name" placeholder="Firstname Lastname" >
                 </p>
 
                 <p>
@@ -67,27 +53,12 @@
                   <input id="courseOfStudies" v-model="courseOfStudies" type="text" name="courseOfStudies"  placeholder="Course of Studies">
                 </p>
 
-                <p>
-                  <label for="universityCity">City University</label>
-                  <input id="universityCity" v-model="universityCity" type="text" name="universityCity"  placeholder="City University">
-                </p>
-
-
-                <p>
-                  <label for="profileimage">Profilbild</label>
-                  <input id="profileimage" type="file" name="profileimage" @change="displayImage" >
-                </p>
-                <img :src="imgSrc">
 
                 <p>
                   <label for="password">Password</label>
                   <input id="password" v-model="password" type="password" name="password"  placeholder="Password">
                 </p>
 
-                <p>
-                  <label for="password2">Password2</label>
-                  <input id="password2" v-model="password2" type="password" name="password2"  placeholder="Password2">
-                </p>
 
                   <p>
                   <input type="submit" value="Submit">
@@ -111,14 +82,10 @@ export default {
       return {
       errors: [],
       name: "",
-      lastname: "",
-      gender: "",
-      birthday: "",
       email: "",
       city: "",
       university:"",
       courseOfStudies:"",
-      universityCity:"",
       password:"",
       password2:"",
       file: {},
@@ -139,12 +106,6 @@ export default {
               lastname: {
                 'en-US': this.lastname
               },
-              gender: {
-                'en-US': this.gender
-              },
-              birthday: {
-                'en-US' : this.birthday
-              },
               city:{
                 'en-US' : this.city
               },
@@ -156,9 +117,6 @@ export default {
               },
               courseOfStudies: {
                 'en-US' : this.courseOfStudies
-              },
-              universityCity: {
-                'en-US' : this.universityCity
               },
               password: {
                 'en-US' : this.password
@@ -266,15 +224,6 @@ export default {
         if (!this.name) {
           this.errors.push("Name required.");
         }
-        if (!this.lastname) {
-          this.errors.push("Lastname required.");
-        }
-        if (!this.gender) {
-          this.errors.push("Gender required.");
-        }
-        if (!this.birthday) {
-          this.errors.push("Birthday required.");
-        }
         if (!this.email) {
           this.errors.push('Email required.');
         } else if (!this.validEmail(this.email)) {
@@ -286,23 +235,11 @@ export default {
         if (!this.university) {
           this.errors.push("University required.");
         }
-        if (!this.universityCity) {
-          this.errors.push("City of your University required.");
-        }
         if (!this.courseOfStudies) {
           this.errors.push("Course of Studies required.");
         }
-        if (!this.birthday) {
-          this.errors.push("Birthday required.");
-        }
         if (!this.password) {
           this.errors.push("Password required.");
-        }
-        if (!this.password2) {
-          this.errors.push("Password confirmation required.");
-        }
-        if(this.password != this.password2){
-          this.errors.push("Passwords must be identical.");
         }
         
         if (!this.errors.length) {
