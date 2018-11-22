@@ -9,11 +9,7 @@
     <div class="grid-x">
         <div class="cell small-10 small-offset-1">
             <div class="mainInfo">
-                <h1> {{currentUser.name}} {{currentUser.lastname}} {{age}}</h1>
-            </div>
-
-            <div class="city">
-                <h3> {{currentUser.city}} </h3>
+                <h1> {{currentUser.name}}</h1>
             </div>
         </div>
     </div>
@@ -24,8 +20,11 @@
 
     <div class="grid-x">
         <div class="cell small-10 small-offset-1">
+            <div class="courseOfStudies">
+                <h3> {{currentUser.courseOfStudies}} </h3>
+            </div>
             <div class="schoolInfo">
-                <h3>{{currentUser.university}} {{currentUser.city}}</h3>
+                <h3>{{currentUser.university}} </h3>
              </div>
         </div>
     
@@ -99,7 +98,7 @@ export default {
 
 <style scoped lang="scss">
 .mainInfo{
-    h1{
+    h2{
         margin-bottom: 0px;
     }
 }
@@ -107,9 +106,16 @@ export default {
     border-radius: 50%;
     }
 .profileimage{
+        margin-top: 8px;
         margin-bottom: 8px;
     }
-.city{
+.courseOfStudies{
+    h3{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    }
+.schoolInfo{
     h3 {
     margin-top: 0px;
     margin-bottom: 10px;

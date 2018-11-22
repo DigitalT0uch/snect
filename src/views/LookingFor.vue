@@ -1,7 +1,6 @@
 <template>
   <div class="lookingfor">
-    <h1>Hi, {{cUserName}} {{cUserLastName}}</h1>
-    <h2>What are you looking for?</h2>
+    <h1>What are you <br> looking for? </br></h1>
     <button @click="goToPeople">People</button>
     <button @click="goToEvents">Events</button>
   </div>
