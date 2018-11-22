@@ -12,12 +12,12 @@
                 novalidate="true"
               >
 
-                <!-- <p v-if="errors.length">
+                <p v-if="errors.length">
                   <b>Please correct the following error(s):</b>
                   <ul>
                     <li v-for="error in errors">{{ error }}</li>
                   </ul>
-                </p> -->
+                </p> 
 
                 <p>
                   <label for="profileimage">Profilbild</label>

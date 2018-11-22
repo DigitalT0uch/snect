@@ -1,7 +1,17 @@
 <template>
   <div class="register">
-    <img class="logo" alt="Snect logo" src="../assets/snect_logo.svg">
+    <div class="grid-container full">
+          <div class="grid-x">
+            <div class="cell small-6 small-offset-3">
+            <div class="animatedLogo">
+                <img class="logo" alt="Snect logo" src="../assets/snect_logo_invert.svg">
+            </div>
+            </div>
+          </div>
 
+          <div class="grid-x">
+           <div class="cell small-10 small-offset-1">
+             
 
 
 
@@ -34,9 +44,12 @@
       </div>
  
         <p>
-        <input class="submitbtn" type="submit" value="Submit">
+        <input class="submitbtn" type="submit" value="Sign in">
         </p>
     </form>
+    </div>
+          </div>
+     </div>
     <div class="register_wrapper">
       <p>New to SNECT?  <router-link to="register" class="register">Sign up</router-link></p>
     </div>
@@ -121,19 +134,42 @@ export default {
 <style scoped lang="scss">
 
 #app{
- .logo{
-   width:300px;
+ .animatedLogo{
+   background: linear-gradient(to right, #e6475f 0%, #ef8138 60%, #e6475f 130%);
+    margin-top:80px;
+   margin-bottom: 50px;
+    background-size: 200% 100%;
+   -webkit-animation: AnimationName 3s ease infinite;
+-moz-animation: AnimationName 3s ease infinite;
+animation: AnimationName 3s ease infinite;
  }
+
+ @-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
   #login{
-    input{
+    input:not([type='submit']){
       width: 80%;
 
       margin: 8px 0;
       
-      padding-left: 20px;
+      padding-left: 5px;
       padding-right: 20px;
       padding-top: 12px;
-      padding-bottom: 12px;
+      padding-bottom: 6px;
       
       border:none;
       border-bottom:1px solid #fff;
@@ -147,29 +183,13 @@ export default {
       color: #fff;
 
       &:focus {outline: none;}
-
     }
+
     .submitbtn{
-        width:70%;
-        flex: 1 1 auto;
-        margin: 10px;
-        padding: 20px;
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        cursor:pointer;
-      /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-        border-bottom:none;
-        border-radius: 30px;
-        /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
-        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
-
-        &:hover{
-          background-position: right center; /* change the direction of the change here */
-        }
+      margin-top: 50px;
+      margin-bottom: 0px;
     }
+    
     .fp-wrapper{
       &:after{
         content: '';
@@ -191,6 +211,7 @@ export default {
     text-align: center;
     display: block;
     color:#a0a0a0;
+    padding-top: 0px;
     a.register{
       color:#fff;
       text-decoration: none;
