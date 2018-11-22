@@ -11,13 +11,6 @@
 
           <div class="grid-x">
            <div class="cell small-10 small-offset-1">
-             
-
-
-
-
-
-
       <form
       id="login"
       @submit.prevent="checkForm"
@@ -137,7 +130,7 @@ export default {
  .animatedLogo{
    background: linear-gradient(to right, #e6475f 0%, #ef8138 60%, #e6475f 130%);
     margin-top:80px;
-   margin-bottom: 50px;
+   margin-bottom: 70px;
     background-size: 200% 100%;
    -webkit-animation: AnimationName 3s ease infinite;
 -moz-animation: AnimationName 3s ease infinite;
@@ -162,12 +155,11 @@ animation: AnimationName 3s ease infinite;
 
   #login{
     input:not([type='submit']){
-      width: 80%;
+      width: 100%;
 
       margin: 8px 0;
       
       padding-left: 5px;
-      padding-right: 20px;
       padding-top: 12px;
       padding-bottom: 6px;
       
@@ -186,8 +178,11 @@ animation: AnimationName 3s ease infinite;
     }
 
     .submitbtn{
-      margin-top: 50px;
-      margin-bottom: 0px;
+      margin-top: 70px;
+      width: 80%;
+    }
+    p{
+      margin: 5px;
     }
     
     .fp-wrapper{
