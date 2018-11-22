@@ -31,17 +31,17 @@
     </div>
     <div class="activities">
         <div id="activitylist" class="demo">
-            <span class="attrInfo" v-for="activity in currentUserActivities">
-                {{ activity.fields.activity }}
-            </span>
+            <div class="attrInfo" v-for="activity in currentUserActivities">
+              <h3>  {{ activity.fields.activity }}</h3>
+            </div>
         </div>
     </div>
 
     <div class="music">
         <div id="musiclist" class="demo">
-            <span class="attrInfo" v-for="music in currentUserMusic">
-                {{ music.fields.genre }}
-            </span>
+            <div class="attrInfo" v-for="music in currentUserMusic">
+               <h3>   {{ music.fields.genre }}</h3>  
+            </div>
         </div>
     </div>
 
@@ -106,7 +106,7 @@ export default {
     border-radius: 50%;
     }
 .profileimage{
-        margin-top: 8px;
+        margin-top: 75px;
         margin-bottom: 8px;
     }
 .courseOfStudies{
@@ -114,11 +114,30 @@ export default {
         margin-top: 0px;
         margin-bottom: 0px;
     }
-    }
+}
 .schoolInfo{
     h3 {
-    margin-top: 0px;
-    margin-bottom: 10px;
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+}
+
+.attrInfo{
+margin: 4px 3px;
+    display:inline-flex;
+  flex: 1 1 auto;
+  padding:7px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  cursor:pointer;
+/* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  border:none;
+  border-radius: 30px;
+  border:1px solid white;
+    h3{
+        margin:0;
     }
 }
 

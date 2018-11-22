@@ -204,5 +204,9 @@ export default {
     margin-top: 120px;
   }
 
+  h1{
+    margin-top: 100px;
+  }
+
 </style>
 

@@ -52,7 +52,7 @@ export default {
 .lookingfor{
   
   h1{
-  
+    margin-top:100px;
     margin-bottom: 200px;}
 }
 

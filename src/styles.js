@@ -11,6 +11,14 @@ let mapstyles =
         ]
       },
       {
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#313131"
+          }
+        ]
+      },
+      {
         "elementType": "labels.icon",
         "stylers": [
           {
@@ -89,6 +97,15 @@ let mapstyles =
       },
       {
         "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#282828"
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
         "elementType": "labels.text.fill",
         "stylers": [
           {
@@ -133,6 +150,15 @@ let mapstyles =
         ]
       },
       {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#464646"
+          }
+        ]
+      },
+      {
         "featureType": "road.highway",
         "elementType": "geometry",
         "stylers": [
@@ -142,11 +168,29 @@ let mapstyles =
         ]
       },
       {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#464646"
+          }
+        ]
+      },
+      {
         "featureType": "road.highway.controlled_access",
         "elementType": "geometry",
         "stylers": [
           {
             "color": "#4e4e4e"
+          }
+        ]
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#262626"
           }
         ]
       },
@@ -169,20 +213,22 @@ let mapstyles =
         ]
       },
       {
-        "featureType": "water",
-        "elementType": "geometry",
+        "featureType": "transit.line",
         "stylers": [
           {
-            "color": "#000000"
+            "color": "#262626"
+          },
+          {
+            "weight": 1
           }
         ]
       },
       {
         "featureType": "water",
-        "elementType": "geometry.fill",
+        "elementType": "geometry",
         "stylers": [
           {
-            "color": "#000059"
+            "color": "#191919"
           }
         ]
       },

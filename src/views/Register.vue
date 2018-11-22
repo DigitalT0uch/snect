@@ -288,6 +288,7 @@ export default {
 
       #profileimage{
         margin-top: 50px;
+        border-bottom: none;
       }
 
     

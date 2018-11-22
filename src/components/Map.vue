@@ -1,14 +1,14 @@
 <template>
     <div class="grid-container full">
-        <div class="grid-x">
+        <div class="grid-x warumnidfullbra">
             <div class="cell small-12">
                 <div id="map"></div>
             </div>
         </div>
         <div class="fixed_bottom">
              <div class="options_section"> 
-                <div id="option_people" v-bind:class="{active: userMode}" class="hCursor map_option" v-on:click="changeMapToPeople">People</div>
-                <div id="option_events"  v-bind:class="{active: !userMode}"  class="hCursor map_option" v-on:click="changeMapToEvents">Events</div>
+                <div id="option_people" v-bind:class="{active: userMode}" class="hCursor map_option" v-on:click="changeMapToPeople"><h2>People</h2></div>
+                <div id="option_events"  v-bind:class="{active: !userMode}"  class="hCursor map_option" v-on:click="changeMapToEvents"><h2>Events</h2></div>
                 <div class="chatcontainer">
                     <div class="chatbtn">
                         <img src="../assets/white_chat.svg">
@@ -210,7 +210,8 @@ export default {
     const options = {
       zoom: 14,
       center: new google.maps.LatLng(this.userLat, this.userLng),
-      styles: this.style
+      styles: this.style,
+      disableDefaultUI: true
     };
 
     this.map = new google.maps.Map(element, options);
@@ -229,8 +230,8 @@ export default {
 
 <style scoped lang="scss">
     #map {
-        height: 80vh;
-        width: 96vw;
+        height: 90vh;
+        width: 100vw;
         display:inline-block;
     }
 </style>
@@ -261,16 +262,15 @@ export default {
             width: 50%;
             text-transform: uppercase;
             font-weight: 700;
-            padding: 10px;
         }
         #option_people{
             &.active{
-                color:#a06a2c;
+                color:#e6475f;
             }
         }
         #option_events{
             &.active{
-                color:#e6475f;
+                color:#a06a2c;
             }
         }
         .chatcontainer{
@@ -290,7 +290,7 @@ export default {
                 transition: 0.5s;
                 color: white;
                 cursor:pointer;
-                margin-top:27px;
+                margin-top:10px;
                 /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
                 border-bottom:none;
                 /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
