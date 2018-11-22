@@ -24,6 +24,7 @@
 
 import mapstyles from "@/styles.js";
 import shared from "@/shared.js";
+import cookies from "@/cookies.js";
 
 export default {
   name: "Map",
@@ -51,9 +52,13 @@ export default {
         this.resetData();
         this.displayData();
       },
-      updateUserPosition: function(){
+      getUserPosition: function(first = false){
           if(navigator.geolocation){
-            var userPosition = navigator.geolocation.getCurrentPosition(this.showPosition);
+              if(first == true){
+                    navigator.geolocation.getCurrentPosition(this.showPosition);
+              }else{
+                    navigator.geolocation.getCurrentPosition(this.updatePosition);
+              }
           }else{
             var error = "Geolocation is not supported by this browser.";
           }
@@ -62,6 +67,22 @@ export default {
             var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             // using global variable:
             this.map.panTo(center);
+      },
+    updatePosition: function(position){
+          //update position in database (contentful)
+
+        window.contentfulManagementClient.getSpace('vqa5vjiwaxli')
+        .then((space)=>{
+          space.getEntry(cookies.getCookie("id"))
+          .then(async (entry)=>{
+              console.log(entry);
+            //let music = {'en-US':[{sys:{id:"4wcSKrltAI2eao2WIgiais", linkType:'Entry', type: 'Link'}}]};
+            entry.fields.lat = {'en-US' : position.coords.latitude};
+            entry.fields.long = {'en-US' : position.coords.longitude};
+            return entry.update();
+            //return null;
+          }).then(entry =>{ return entry.publish();})
+        })
       },
       displayData: function(){
             let mapPref = this.map;
@@ -85,10 +106,14 @@ export default {
                 }
                 if(this.userMode){
                     var profileimg = entry.fields.profileImage;
-                    if(profileimg){
-                        //console.log(profileimg.fields.file.url);
-                        profileimg = profileimg.fields.file.url;
-                        iconUrl = profileimg;
+                    if(cookies.getCookie("id")==entry.sys.id){
+                        iconUrl = require("../assets/meinstandort.png");  
+                    }else{
+                        if(profileimg){
+                            //console.log(profileimg.fields.file.url);
+                            profileimg = profileimg.fields.file.url;
+                            iconUrl = profileimg;
+                        }
                     }
                 }
                 let latCord = entry.fields.lat;
@@ -103,6 +128,7 @@ export default {
                         map: mapPref,
                         optimized: false
                     });
+                marker.id = entry.sys.id;
                 this.markers.push(marker);
                 //this.markers[this.markers.length -1].setMap(mapPref);
                 let contentString ="";
@@ -147,6 +173,17 @@ export default {
           }
            this.changeMap();
       },
+      updateMapData: function(){
+        contentfulClient.getEntries({'content_type': "user"}).then((entries) => {
+            entries.items.forEach((entry) => {
+                this.markers.forEach(function(marker){
+                    if(marker.id == entry.sys.id){
+                        marker.setPosition(new google.maps.LatLng(entry.fields.lat, entry.fields.long));
+                    }
+                });
+            })
+        })
+      },
       resetData: function(){
 
             this.markers.forEach(function(marker) {
@@ -158,7 +195,9 @@ export default {
   mounted: function() {
     const element = document.getElementById("map");
 
-    this.updateUserPosition();
+    this.getUserPosition(true);
+    this.interval = setInterval(() => this.getUserPosition(), 100000);
+    this.interval2 = setInterval(() => this.updateMapData(), 10000);
     if(this.$route.params.pref){
         if(this.$route.params.pref == "people"){
             this.userMode = true;
