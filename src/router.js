@@ -81,13 +81,13 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/Register_Design.vue")
     },
     {
-      path: "/map_design",
-      name: "design2",
+      path: "/preferences",
+      name: "preferences",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/MapView_Design.vue")
+        import(/* webpackChunkName: "about" */ "./views/Preferences.vue")
     }
   ],
   scrollBehavior: function(to, from, savedPosition){

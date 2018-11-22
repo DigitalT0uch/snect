@@ -36,7 +36,7 @@ export default {
   methods: {
     goToPeople: function(){
       console.log('function call people');
-      this.$router.push("/map/people");
+      this.$router.push("/preferences");
     },
     goToEvents: function(){
       console.log('function call events');
