@@ -4,7 +4,7 @@
 
       <div class="grid-x">
         <div class="cell small-10 small-offset-1">
-          <div class="container">
+          <div class="container container-first">
               <div class="activities activities_checked" name="activity" v-for="activity in currentActivities">
                 <div class="select" v-on:click="deselectActivity(activity)">{{activity.fields.activity}}</div>
               </div>
@@ -143,13 +143,14 @@ export default {
 .container{
   margin:10px;
   width: 100%;
-  &:first-child{
-    margin-top:20px;
+  &.container-first{
+    margin-top:50px;
   }
 }
   .activities{
     display:inline-flex;
     margin: 5px;
+    margin-left: 0;
     float: left;
     .select{
       padding: 5px;
@@ -169,7 +170,8 @@ export default {
   
   .music{
     display:inline-flex;
-    margin: 5px 0;
+    margin: 5px;
+    margin-left: 0;
     float: left;
     .select{
       padding: 5px;
