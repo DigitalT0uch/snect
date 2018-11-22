@@ -2,6 +2,12 @@
   <div class="register">
     <img class="logo" alt="Snect logo" src="../assets/snect_logo.svg">
 
+
+
+
+
+
+
       <form
       id="login"
       @submit.prevent="checkForm"

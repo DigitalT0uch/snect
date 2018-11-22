@@ -2,24 +2,22 @@
   <div class="register">
      <div class="grid-container full">
           <div class="grid-x">
-            <div class="cell small-6 small-offset-3"> 
-               <h1>Register</h1>
-            </div>
+            
           </div>
           <div class="grid-x">
-           <div class="cell small-6 small-offset-3">
+           <div class="cell small-10 small-offset-1">
               <form
-                id="app"
+                id="register"
                 @submit.prevent="checkForm"
                 novalidate="true"
               >
 
-                <p v-if="errors.length">
+                <!-- <p v-if="errors.length">
                   <b>Please correct the following error(s):</b>
                   <ul>
                     <li v-for="error in errors">{{ error }}</li>
                   </ul>
-                </p>
+                </p> -->
 
                 <p>
                   <label for="profileimage">Profilbild</label>
@@ -28,40 +26,34 @@
                 <img :src="imgSrc">
 
                 <p>
-                  <label for="name">Name</label>
                   <input id="name" v-model="name" type="text" name="name" placeholder="Firstname Lastname" >
                 </p>
 
                 <p>
-                  <label for="city">City</label>
                   <input id="city" v-model="city" type="text" name="city"  placeholder="City">
                 </p>
                 
                 <p>
-                  <label for="email">Email</label>
                   <input id="email" v-model="email" type="email" name="email"  placeholder="Email">
                 </p>
 
                 
                 <p>
-                  <label for="university">University</label>
                   <input id="university" v-model="university" type="text" name="university"  placeholder="University">
                 </p>
 
                 <p>
-                  <label for="courseOfStudies">Course of Studies</label>
                   <input id="courseOfStudies" v-model="courseOfStudies" type="text" name="courseOfStudies"  placeholder="Course of Studies">
                 </p>
 
 
                 <p>
-                  <label for="password">Password</label>
                   <input id="password" v-model="password" type="password" name="password"  placeholder="Password">
                 </p>
 
 
                   <p>
-                  <input type="submit" value="Submit">
+                  <input class="submitbtn" type="submit" value="Continue">
                   </p>
               </form>
             </div>
@@ -264,4 +256,69 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+#register{
+    input{
+      width: 100%;
+
+      margin: 2px 0;
+      
+      padding-left: 5px;
+      padding-right: 20px;
+      padding-top: 12px;
+      padding-bottom: 6px;
+      
+      border:none;
+      border-bottom:1px solid #fff;
+      opacity: 1;
+
+      background-color:#323232;
+
+      display: inline-block;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      color: #fff;
+
+      &:focus {outline: none;}
+
+    }
+    .submitbtn{
+        width:100%;
+        flex: 1 1 auto;
+        margin: 10px;
+        padding: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        cursor:pointer;
+      /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+        border-bottom:none;
+        border-radius: 30px;
+        /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
+        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
+
+        &:hover{
+          background-position: right center; /* change the direction of the change here */
+        }
+    }
+    .fp-wrapper{
+      &:after{
+        content: '';
+        display: block;
+        clear: both;
+      }
+      a.forgotpw{
+        color:#a0a0a0;
+        text-decoration: none;
+        font-size:12px;
+        margin-right:10%;
+        float:right;
+      }
+    }
+
+  }
+
 </style>
