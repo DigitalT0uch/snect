@@ -65,8 +65,8 @@ img.snect_logo{
         text-align: center;
         text-transform: uppercase;
           font-size: 4.75vw;
-  font-weight: 700;
-  letter-spacing: 0.6vw; 
+        font-weight: 700;
+        letter-spacing: 0.6vw; 
         transition: 0.5s;
         background-size: 200% auto;
         color: white;

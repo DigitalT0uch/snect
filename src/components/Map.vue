@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="grid-container full">
         <div class="grid-x">
             <div class="cell small-12">
                 <div id="map"></div>

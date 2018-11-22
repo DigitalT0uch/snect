@@ -1,19 +1,53 @@
 <template>
-  <div class="preferences">
+    <div class="grid-container full preferences">
 
 
-      <div class="activities" name="activity" v-for="activity in userActivities">
-        <input type="checkbox" name="genre" >{{activity.fields.activity}}</input>
+      <div class="grid-x">
+        <div class="cell small-10 small-offset-1">
+          <div class="container">
+              <div class="activities activities_checked" name="activity" v-for="activity in currentActivities">
+                <div class="select" v-on:click="deselectActivity(activity)">{{activity.fields.activity}}</div>
+              </div>
+          </div>
+        </div>
       </div>
-
-
-
-    <div class="music" name="music" v-for="genre in userMusic">
-      <input type="checkbox" name="music" >{{genre.fields.genre}}</input>
+   
+   <div class="grid-x">
+      <div class="cell small-10 small-offset-1">
+        <div class="container">
+          <div class="activities " name="activity" v-for="activity in userActivities">
+            <div class="select" v-if="activity.show" v-on:click="selectActivity(activity)" >{{activity.fields.activity}}</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p>
-      <input class="submitbtn" type="submit" value="Submit">
-    </p>
+
+    <div class="grid-x">
+      <div class="cell small-10 small-offset-1">
+        <div class="container">
+          <div class="music music_checked" v-for="genre in currentMusic">
+            <div class="select" v-on:click="deselectMusic(genre)">{{genre.fields.genre}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-x">
+      <div class="cell small-10 small-offset-1">
+        <div class="container">
+          <div class="music" v-for="genre in userMusic">
+            <div class="select" v-if="genre.show" v-on:click="selectMusic(genre)" >{{genre.fields.genre}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-x">
+      <div class="cell small-10 small-offset-1">
+        <p>
+          <input v-on:click="savePreferences" class="submitbtn" type="submit" value="Submit">
+        </p>
+      </div>
+    </div>  
   </div>
 </template>
 
@@ -37,8 +71,10 @@ export default {
       cUserName : "",
       cUserLastName : "",
       cUserEmail : "",
-      userActivities: "",
-      userMusic: ""
+      userActivities: [],
+      currentActivities: [],
+      userMusic: [],
+      currentMusic: []
     }
   },
   methods:{
@@ -49,10 +85,52 @@ export default {
         })
         .then((entries)=>{
           entries.items.forEach((entry)=>{
-            this.userActivities = entry.fields.activities;
-            this.userMusic = entry.fields.music;
+            entry.fields.activities.forEach((activity)=>{
+              activity.show = true;
+              this.userActivities.push(activity);
+            })
+            entry.fields.music.forEach((genre)=>{
+              genre.show = true;
+              this.userMusic.push(genre);
+            })
           })
         }).catch();
+    },
+    selectActivity: function(activity){
+      this.userActivities.forEach((cactivity)=>{
+        if(cactivity.fields.activity == activity.fields.activity){
+          cactivity.show = false;
+        }
+      })
+      this.currentActivities.push(activity)
+    },
+    deselectActivity: function(activity){
+      this.userActivities.forEach((cactivity)=>{
+        if(cactivity.fields.activity == activity.fields.activity){
+          cactivity.show = true;
+        }
+      })
+      this.currentActivities.pop(activity)
+    },
+    selectMusic: function(genre){
+      this.userMusic.forEach((cMusic)=>{
+        console.log(cMusic);
+        if(cMusic.fields.genre == genre.fields.genre){
+          cMusic.show = false;
+        }
+      })
+      this.currentMusic.push(genre);
+    },
+    deselectMusic: function(genre){
+      this.userMusic.forEach((cgenre)=>{
+        if(cgenre.fields.genre == genre.fields.genre){
+          cgenre.show = true;
+        }
+      })
+      this.currentMusic.pop(genre)
+    },
+    savePreferences: function(){
+      this.$router.push("/map/user");
     }
   }
 };
@@ -62,6 +140,56 @@ export default {
 
 <style scoped lang="scss">
 
+.container{
+  margin:10px;
+  width: 100%;
+  &:first-child{
+    margin-top:20px;
+  }
+}
+  .activities{
+    display:inline-flex;
+    margin: 5px;
+    float: left;
+    .select{
+      padding: 5px;
+      border: 1px solid white;
+    }
+    &.activities_checked{
+      border: none;
+      .select{
+        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
+        background-size: 200% auto;
+        &:hover{
+          background-position: right center; /* change the direction of the change here */
+        }
+      }
+    }
+  }
+  
+  .music{
+    display:inline-flex;
+    margin: 5px 0;
+    float: left;
+    .select{
+      padding: 5px;
+      border: 1px solid white;
+    }
+    &.music_checked{
+      border: none;
+      .select{
+        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
+        background-size: 200% auto;
+        &:hover{
+          background-position: right center; /* change the direction of the change here */
+        }
+      }
+    }
+  }
+  .select{
+    display:inline-flex;
+    border-radius: 30px;
+  }
 
 </style>
 
