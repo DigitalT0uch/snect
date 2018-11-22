@@ -7,8 +7,9 @@
              </div>
              </div>
     <h1>Are you bored <br> or lonely? </br></h1>
-    <button class="submitbtn" @click="goToPeople">Find People</button>
+
     <button class="submitbtn" @click="goToEvents">Find Events</button>
+        <button class="submitbtn" @click="goToPeople">Find People</button>
   </div>
 </template>
 
@@ -53,8 +54,5 @@ export default {
   
     margin-bottom: 200px;}
 }
-     .warumnidfullbra{
-      width: 100%;
-      }
 
 </style>

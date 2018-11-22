@@ -2,7 +2,7 @@
     <div class="grid-container full preferences">
 
 
-      <div class="grid-x">
+      <div class="grid-x warumnidfullbra">
         <div class="cell small-10 small-offset-1">
           <div class="container container-first">
               <div class="activities activities_checked" name="activity" v-for="activity in currentActivities">
@@ -152,6 +152,7 @@ export default {
     margin: 5px;
     margin-left: 0;
     float: left;
+    cursor:pointer;
     .select{
       padding: 5px;
       padding-left:8px;
@@ -175,6 +176,7 @@ export default {
     margin: 5px;
     margin-left: 0;
     float: left;
+    cursor:pointer;
     .select{
       padding: 5px;
       padding-left:8px;

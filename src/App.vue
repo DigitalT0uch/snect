@@ -80,6 +80,10 @@ body{
           background-position: right center; /* change the direction of the change here */
         }
     }
+
+          .warumnidfullbra{
+      width: 100%;
+      }
 </style>
 
 
