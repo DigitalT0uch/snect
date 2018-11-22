@@ -56,6 +56,32 @@ img.snect_logo{
     width: 15px;
     height:15px;
 }
+
+#login input.submitbtn{
+        width:70%;
+        flex: 1 1 auto;
+        margin: 10px;
+        padding: 20px;
+        text-align: center;
+        text-transform: uppercase;
+          font-size: 4.75vw;
+  font-weight: 700;
+  letter-spacing: 0.6vw; 
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        cursor:pointer;
+      /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+        border:none;
+        border-radius: 30px;
+        /*background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);*/
+        background-image: linear-gradient(to right, #e6475f 0%, #ef8138 51%, #e6475f 100%);
+
+        &:hover{
+          background-position: right center; /* change the direction of the change here */
+        }
+    }
+
 </style>
 
 

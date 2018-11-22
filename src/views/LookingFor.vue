@@ -1,8 +1,8 @@
 <template>
   <div class="lookingfor">
     <h1>What are you <br> looking for? </br></h1>
-    <button @click="goToPeople">People</button>
-    <button @click="goToEvents">Events</button>
+    <button class="submitbtn" @click="goToPeople">People</button>
+    <button class="submitbtn" @click="goToEvents">Events</button>
   </div>
 </template>
 
@@ -41,5 +41,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.lookingfor{
+  h1{
+  
+    margin-bottom: 200px;}
+}
 
 </style>
