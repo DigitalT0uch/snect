@@ -167,12 +167,15 @@ export default {
 
           }
         this.changeMap();
+       this.$router.push("/map/user");
       },
       changeMapToEvents: function(){
           if(this.userMode){
               this.userMode = false;
           }
            this.changeMap();
+            
+       this.$router.push("/map/events");
       },
       updateMapData: function(){
         contentfulClient.getEntries({'content_type': "user"}).then((entries) => {
@@ -198,7 +201,7 @@ export default {
 
     this.getUserPosition(true);
     this.interval = setInterval(() => this.getUserPosition(), 100000);
-    this.interval2 = setInterval(() => this.updateMapData(), 10000);
+    this.interval2 = setInterval(() => this.updateMapData(), 7000);
     this.style = mapstyles["lighttheme"];
     if(this.$route.params.pref){
         if(this.$route.params.pref == "user"){

@@ -10,8 +10,8 @@
                 <div class="cell small-10 small-offset-1">
                     <div class="mainInfo">
                         <h1> {{currentEvent.eventName}}</h1>
-                        <p>{{currentEvent.dateTime}}</p>
-                        <p>{{currentEvent.endDate}}</p>
+                        <p>{{date}}</p>
+                        <p>{{enddate}}</p>
                     </div>
                 </div>
             </div>
@@ -43,6 +43,7 @@ export default {
             currentEvent: {},
             currentEventImage: '',
             date: '',
+            enddate:'',
             description: ''
         }
     },
@@ -50,6 +51,14 @@ export default {
         console.log(this.events);
         this.currentEvent = this.events[this.id].fields;
         this.currentEventImage = this.currentEvent.flyer.fields.file.url;
+        this.date = new Date(this.events[this.id].fields.dateTime);
+        var month = this.date.getUTCMonth() + 1; //months from 1-12
+        var day = this.date.getUTCDate();
+        var year = this.date.getUTCFullYear();
+        var hours = this.date.getHours();
+        var minutes = this.date.getMinutes();
+        this.date = day+"."+month+"."+year+" "+hours+":"+minutes;
+
     },
     methods: {
     }
