@@ -1,7 +1,7 @@
 <template>
   <div class="map">
-    <Logout />
-   <!-- <p> Email: {{cUserEmail}} </p> -->
+    <!-- <Logout />
+   <p> Email: {{cUserEmail}} </p> -->
     <Map />
   </div>
 </template>

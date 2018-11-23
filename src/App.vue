@@ -4,7 +4,7 @@
       <a href="javascript:history.go(-1)" class="backlink"> <img class="navicon" src="@/assets/icons/white_back.svg"/></a>
       <div class="navright">
         <router-link to="/" v-if="$route.name != 'register' && $route.name != 'lookingfor' && $route.name != 'user'"><img src="@/assets/icons/white_filter.svg" class="navicon"/></router-link>
-        <router-link to="/"><img src="@/assets/icons/white_settings.svg" class="navicon" /></router-link>
+        <router-link to="" @click.native="logout"><img src="@/assets/icons/white_settings.svg" class="navicon" /></router-link>
       </div>
     </div>
     <router-view/>
@@ -13,12 +13,20 @@
 
 
 <script>
-function logout(){
+
+import cookies from "@/cookies.js";
+
+export default {
+  name: "app",
+  methods: {
+      logout: function(){
         cookies.deleteCookie("email");
         cookies.deleteCookie("name");
         cookies.deleteCookie("lastname");
         this.$router.push("/");
-      };
+      }
+  }
+};
 </script>
 
 <!-- Globaler import -->

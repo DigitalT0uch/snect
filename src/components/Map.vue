@@ -75,7 +75,6 @@ export default {
         .then((space)=>{
           space.getEntry(cookies.getCookie("id"))
           .then(async (entry)=>{
-              console.log(entry);
             //let music = {'en-US':[{sys:{id:"4wcSKrltAI2eao2WIgiais", linkType:'Entry', type: 'Link'}}]};
             entry.fields.lat = {'en-US' : position.coords.latitude};
             entry.fields.long = {'en-US' : position.coords.longitude};
@@ -99,7 +98,7 @@ export default {
                 switch (entry.fields["iconType"]) {
                     case "event":
                         iconUrl =
-                        "http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-rating-icon.png";
+                        require("../assets/icons/concert-14.png");
                         break;
                     case "default":
                         break;
@@ -115,6 +114,8 @@ export default {
                             iconUrl = profileimg;
                         }
                     }
+                }else{
+                    var flyer = entry.fields.flyer;
                 }
                 let latCord = entry.fields.lat;
                 let lngCord = entry.fields.long;
@@ -145,7 +146,7 @@ export default {
                 }else{
                      shared.events[entry.sys.id]=
                     {
-                        profileimg: profileimg,
+                        flyer: flyer,
                         fields:  entry.fields
                     };
                     marker.addListener("click", event => {
@@ -198,8 +199,9 @@ export default {
     this.getUserPosition(true);
     this.interval = setInterval(() => this.getUserPosition(), 100000);
     this.interval2 = setInterval(() => this.updateMapData(), 10000);
+    this.style = mapstyles["lighttheme"];
     if(this.$route.params.pref){
-        if(this.$route.params.pref == "people"){
+        if(this.$route.params.pref == "user"){
             this.userMode = true;
             this.style = mapstyles["lighttheme"];
         }else if(this.$route.params.pref=="events"){

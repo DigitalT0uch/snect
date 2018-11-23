@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="grid-container full">
-          <div class="grid-x">
+          <div class="grid-x warumnidfullbra">
             <div class="cell small-6 small-offset-3"> 
                 <img v-bind:src= "currentUserImage" class="roundImage profileimage"/>  
             </div>

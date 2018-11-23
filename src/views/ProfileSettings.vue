@@ -1,31 +1,35 @@
 <template>
-  <div>
-    <div v-if="this.step == 0">
-      <h1>Are you a metalhead or a hiphoper?</h1>
-      <form      
-        id="music_settings"
-        @submit.prevent="updateUserMusic"
-        novalidate="true">
-        <div name="genre" v-for="genre in music">
-          <input v-model='genre.checked' type="checkbox" name="genre" :value='genre.name'>{{genre.name}}</input>
-        </div>
-        <input type="submit" value="Submit">
-      </form>
+   <div class="grid-container full">
+     <div class="grid-x warumnidfullbra" v-if="this.step == 0">
+       <div class="cell small-10 small-offset-1">
+          <h1>Are you a metalhead or a hiphoper?</h1>
+          <form      
+            id="music_settings"
+            @submit.prevent="updateUserMusic"
+            novalidate="true">
+            <div name="genre" v-for="genre in music">
+              <input v-model='genre.checked' type="checkbox" name="genre" :value='genre.name'>{{genre.name}}</input>
+            </div>
+            <input type="submit" value="Submit" class="submitbtn">
+          </form>
+          </div>
     </div>
 
-    <div  v-if="this.step == 1">
-      <h1>What kind of Sports do you like?</h1>
-      <form      
-        id="activities_settings"
-        @submit.prevent="updateUserActivity"
-        novalidate="true">
+    <div class="grid-x warumnidfullbra"  v-if="this.step == 1">
+      <div class="cell small-10 small-offset-1">
+        <h1>What kind of Sports do you like?</h1>
+        <form      
+          id="activities_settings"
+          @submit.prevent="updateUserActivity"
+          novalidate="true">
 
-        <div name="activities" v-for="sport in activities">
-          <input v-model='sport.checked'  type="checkbox" name="activities" :value='sport.name'>{{sport.name}}</input>
+          <div name="activities" v-for="sport in activities">
+            <input v-model='sport.checked'  type="checkbox" name="activities" :value='sport.name'>{{sport.name}}</input>
+          </div>
+
+          <input type="submit" value="Submit" class="submitbtn">
+        </form>
         </div>
-
-        <input type="submit" value="Submit">
-      </form>
     </div>
 
   </div>
